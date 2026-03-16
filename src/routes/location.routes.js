@@ -13,7 +13,7 @@ const upload = multer({ storage: storage }).array('photos', 5);
 router.post('/create', authorizeRoles('owner'),upload, locationController.createLocation);
 router.get('/all', authorizeRoles('owner'), locationController.getAllLocations);
 router.get('/bookings',authorizeRoles('owner'),locationController.getOwnerBookings)
-router.post('/confirm' ,authorizeRoles('owner'),locationController.getOwnerBookings)
-router.post('/cancel',authorizeRoles('owner'),locationController.getOwnerBookings)
+router.post('/confirm' ,authorizeRoles('owner'),locationController.confirmBooking)
+router.post('/cancel',authorizeRoles('owner'),locationController.cancelBooking)
 
 module.exports = router;
