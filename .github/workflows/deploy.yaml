@@ -1,24 +1,19 @@
-services:
-  - type: web
-    name: find-spot-api
-    env: docker
-    dockerfilePath: ./Dockerfile
-    branch: main
-    plan: free
-    buildCommand: |
-      echo "Installing dependencies..."
-      npm install
-      echo "Running tests..."
-      npm test
-    startCommand: |
-      echo "Starting app..."
-      node server.js
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: "10000"
-      - key: JWT_SECRET
-        value: "[(SCMjdQGz/HBEf!aUr<IzZc|f&O7#A)$;Q]wGFBu8C"
-      - key: IMAGE_KIT_PRIVATE
-        value: "private_15uJY1lVxAr1O7AlEbjD+YGg1YM="
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
